@@ -3,6 +3,7 @@ package com.example.cut.views
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.cut.R
@@ -17,10 +18,12 @@ class InitActivity: FragmentActivity() {
 
     public override fun onStart() {
         super.onStart()
-        val email = this.getSharedPreferences(
-            getString(R.string.email), Context.MODE_PRIVATE)
-        val password = this.getSharedPreferences(
-            getString(R.string.password), Context.MODE_PRIVATE)
+        val sharedPreferences = this.getSharedPreferences(
+            getString(R.string.shared_pref), Context.MODE_PRIVATE)
+        val email = sharedPreferences.getString(getString(R.string.email), null)
+        val password = sharedPreferences.getString(getString(R.string.password), null)
+        Log.v("email", email.toString());
+        Log.v("password", password.toString());
         if (email != null && password != null) {
             startActivity(
                 Intent(
